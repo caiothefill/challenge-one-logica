@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Tarefas - Challenge ONE</title>
+</head>
+<body>
+  <script>
+    let tarefas = [];
+
+    function mostrarMenu() {
+      return prompt(
+        "Escolha uma opção:\n" +
+        "1 - Adicionar tarefa\n" +
+        "2 - Listar tarefas\n" +
+        "3 - Marcar tarefa como concluída\n" +
+        "4 - Remover tarefa\n" +
+        "5 - Sair"
+      );
+    }
+
+    function adicionarTarefa() {
+      const tarefa = prompt("Digite a nova tarefa:");
+      tarefas.push({ descricao: tarefa, concluida: false });
+      alert("Tarefa adicionada com sucesso!");
+    }
+
+    function listarTarefas() {
+      if (tarefas.length === 0) {
+        alert("Nenhuma tarefa cadastrada.");
+        return;
+      }
+
+      let lista = "Tarefas:\n";
+      for (let i = 0; i < tarefas.length; i++) {
+        const status = tarefas[i].concluida ? "✅" : "❌";
+        lista += `${i + 1}. ${tarefas[i].descricao} ${status}\n`;
+      }
+      alert(lista);
+    }
+
+    function concluirTarefa() {
+      const index = parseInt(prompt("Digite o número da tarefa a marcar como concluída:")) - 1;
+      if (tarefas[index]) {
+        tarefas[index].concluida = true;
+        alert("Tarefa marcada como concluída!");
+      } else {
+        alert("Número inválido.");
+      }
+    }
+
+    function removerTarefa() {
+      const index = parseInt(prompt("Digite o número da tarefa a remover:")) - 1;
+      if (tarefas[index]) {
+        tarefas.splice(index, 1);
+        alert("Tarefa removida com sucesso!");
+      } else {
+        alert("Número inválido.");
+      }
+    }
+
+    function executar() {
+      let opcao;
+      while (opcao !== "5") {
+        opcao = mostrarMenu();
+        if (opcao === "1") {
+          adicionarTarefa();
+        } else if (opcao === "2") {
+          listarTarefas();
+        } else if (opcao === "3") {
+          concluirTarefa();
+        } else if (opcao === "4") {
+          removerTarefa();
+        } else if (opcao === "5") {
+          alert("Saindo...");
+        } else {
+          alert("Opção inválida.");
+        }
+      }
+    }
+
+    executar();
+  </script>
+</body>
+</html>
